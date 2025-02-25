@@ -1,17 +1,17 @@
 'use client';
 
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Roboto_Mono } from "next/font/google";
 import "./globals.css";
 import { AnimatePresence } from 'framer-motion';
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
   subsets: ["latin"],
+  variable: "--font-inter",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const robotoMono = Roboto_Mono({
   subsets: ["latin"],
+  variable: "--font-roboto-mono",
 });
 
 export default function RootLayout({
@@ -25,7 +25,7 @@ export default function RootLayout({
         <title>BOP - Bouw Op Perfectie</title>
         <meta name="description" content="Luxe renovaties en verbouwingen met oog voor detail" />
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className={`${inter.variable} ${robotoMono.variable} antialiased`}>
         <AnimatePresence mode="wait">
           {children}
         </AnimatePresence>
