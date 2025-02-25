@@ -104,7 +104,8 @@ const contentAnimation = {
 
 export default function ProjectDetail({ params }: { params: { id: string } }) {
   const router = useRouter();
-  const project = projectData[params.id as keyof typeof projectData];
+  const projectId = parseInt(params.id);
+  const project = projectData[projectId as keyof typeof projectData];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isSliding, setIsSliding] = useState(false);
 
