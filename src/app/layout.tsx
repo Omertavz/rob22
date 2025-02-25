@@ -2,17 +2,24 @@
 
 import { Inter, Roboto_Mono } from "next/font/google";
 import "./globals.css";
-import { AnimatePresence } from 'framer-motion';
+import { Metadata } from "next";
 
 const inter = Inter({
   subsets: ["latin"],
+  display: "swap",
   variable: "--font-inter",
 });
 
 const robotoMono = Roboto_Mono({
   subsets: ["latin"],
+  display: "swap",
   variable: "--font-roboto-mono",
 });
+
+export const metadata: Metadata = {
+  title: "BOP - Bouw Op Perfectie",
+  description: "Luxe renovaties en verbouwingen met oog voor detail",
+};
 
 export default function RootLayout({
   children,
@@ -20,15 +27,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="nl">
-      <head>
-        <title>BOP - Bouw Op Perfectie</title>
-        <meta name="description" content="Luxe renovaties en verbouwingen met oog voor detail" />
-      </head>
-      <body className={`${inter.variable} ${robotoMono.variable} antialiased`}>
-        <AnimatePresence mode="wait">
-          {children}
-        </AnimatePresence>
+    <html lang="nl" className={`${inter.variable} ${robotoMono.variable}`}>
+      <body className="antialiased bg-[#0C0C0C]">
+        {children}
       </body>
     </html>
   );
