@@ -75,6 +75,7 @@ const categories = [
 ];
 
 export default function Home() {
+  const [mounted, setMounted] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const heroRef = useRef(null);
   const projectsRef = useRef(null);
@@ -186,6 +187,8 @@ export default function Home() {
   };
 
   useEffect(() => {
+    setMounted(true);
+    
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
@@ -206,12 +209,13 @@ export default function Home() {
 
     requestAnimationFrame(raf);
 
-    // Hero animatie
-    gsap.fromTo(
-      heroRef.current,
-      { opacity: 0, y: 100 },
-      { opacity: 1, y: 0, duration: 1.5, ease: 'power4.out' }
-    );
+    if (heroRef.current) {
+      gsap.fromTo(
+        heroRef.current,
+        { opacity: 0, y: 100 },
+        { opacity: 1, y: 0, duration: 1.5, ease: 'power4.out' }
+      );
+    }
 
     const interval = setInterval(() => {
       nextSlide();
@@ -227,16 +231,24 @@ export default function Home() {
     window.addEventListener('mousemove', handleMouseMove);
 
     return () => {
-      lenis.destroy();
+      if (lenis) lenis.destroy();
       window.removeEventListener('scroll', handleScroll);
       clearInterval(interval);
       window.removeEventListener('mousemove', handleMouseMove);
     };
   }, []);
 
+  if (!mounted) {
+    return (
+      <div className="fixed inset-0 bg-[#0C0C0C] flex items-center justify-center">
+        <div className="text-white text-2xl">Loading...</div>
+      </div>
+    );
+  }
+
   return (
     <AnimatePresence mode="wait">
-      <main className="relative min-h-screen bg-[#0C0C0C]">
+      <main className="relative min-h-screen bg-[#0C0C0C] text-white">
         {/* Menu Overlay */}
         <AnimatePresence>
           {isMenuOpen && (

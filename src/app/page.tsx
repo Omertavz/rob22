@@ -1,7 +1,5 @@
-'use client';
-
-import Intro from '../components/Intro';
+import { redirect } from 'next/navigation';
 
 export default function Page() {
-  return <Intro />;
+  redirect('/home');
 }
